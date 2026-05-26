@@ -1,6 +1,6 @@
 import { PrismaLibSql } from '@prisma/adapter-libsql';
-import { PrismaClient } from '../generated/prisma/client.js';
-import type { Book } from '../generated/prisma/client.js';
+import { PrismaClient } from '@/generated/prisma/client.js';
+import type { Book } from '@/generated/prisma/client.js';
 
 export class PrismaBookRepository {
   private prisma: PrismaClient;
@@ -17,6 +17,13 @@ export class PrismaBookRepository {
       data: {
         title,
         isAvailable: true,
+      },
+    });
+  }
+  async findById(id: string): Promise<Book | null> {
+    return await this.prisma.book.findUnique({
+      where: {
+        id,
       },
     });
   }

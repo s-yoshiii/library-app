@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import { BookService } from '@/businessLogic/BookService.js';
 
-export class bookController {
+export class BookController {
   private bookService: BookService;
   constructor() {
     this.bookService = new BookService();

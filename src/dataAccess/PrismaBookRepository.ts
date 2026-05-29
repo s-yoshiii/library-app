@@ -1,8 +1,9 @@
 import { PrismaLibSql } from '@prisma/adapter-libsql';
 import { PrismaClient } from '@/generated/prisma/client.js';
 import type { Book } from '@/generated/prisma/client.js';
+import type { BookRepositoryInterface } from './BookRepositoryInterface.js';
 
-export class PrismaBookRepository {
+export class PrismaBookRepository implements BookRepositoryInterface {
   private prisma: PrismaClient;
 
   constructor() {

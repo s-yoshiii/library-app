@@ -1,7 +1,7 @@
 import { PrismaLibSql } from '@prisma/adapter-libsql';
 import { PrismaClient } from '@/generated/prisma/client.js';
-import type { Book } from '@/generated/prisma/client.js';
-import type { BookRepositoryInterface } from './BookRepositoryInterface.js';
+import { Book } from '../domain/entities/book.js';
+import type { BookRepositoryInterface } from '../domain/repositories/BookRepositoryInterface.js';
 
 export class PrismaBookRepository implements BookRepositoryInterface {
   private prisma: PrismaClient;
@@ -14,18 +14,15 @@ export class PrismaBookRepository implements BookRepositoryInterface {
   }
 
   async create(title: string): Promise<Book> {
-    return await this.prisma.book.create({
-      data: {
-        title,
-        isAvailable: true,
-      },
+    const row = await this.prisma.book.create({
+      data: { title, isAvailable: true },
     });
+    return new Book(row.id, row.title, row.isAvailable, row.createdAt, row.upDatedAt);
   }
+
   async findById(id: string): Promise<Book | null> {
-    return await this.prisma.book.findUnique({
-      where: {
-        id,
-      },
-    });
+    const row = await this.prisma.book.findUnique({ where: { id } });
+    if (!row) return null;
+    return new Book(row.id, row.title, row.isAvailable, row.createdAt, row.upDatedAt);
   }
 }

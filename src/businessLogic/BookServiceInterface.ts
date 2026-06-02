@@ -1,4 +1,4 @@
-import type { Book } from '@/generated/prisma/client.js';
+import type { Book } from '@/domain/entities/book.js';
 
 export interface BookServiceInterface {
   add(title: string): Promise<Book>;

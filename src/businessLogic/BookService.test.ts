@@ -1,6 +1,6 @@
 /// <reference types="jest" />
-import type { Book } from '@/generated/prisma/client.js';
-import type { BookRepositoryInterface } from '../dataAccess/BookRepositoryInterface.js';
+import { Book } from '../domain/entities/book.js';
+import type { BookRepositoryInterface } from '../domain/repositories/BookRepositoryInterface.js';
 import { BookService } from './BookService.js';
 
 const mockBookRepository: jest.Mocked<BookRepositoryInterface> = {
@@ -17,26 +17,14 @@ describe('BookService', () => {
     jest.clearAllMocks();
   });
   it('書籍の登録が成功する', async () => {
-    const newBook: Book = {
-      id: '1',
-      title: 'Test Book',
-      isAvailable: true,
-      createdAt: new Date(),
-      upDatedAt: new Date(),
-    };
+    const newBook = new Book('1', 'Test Book', true, new Date(), new Date());
     mockBookRepository.create.mockResolvedValue(newBook);
     const result = await bookService.add('Test Book');
     expect(result).toEqual(newBook);
     expect(mockBookRepository.create).toHaveBeenCalledWith('Test Book');
   });
   it('書籍の検索が成功する', async () => {
-    const book: Book = {
-      id: '1',
-      title: 'Test Book',
-      isAvailable: true,
-      createdAt: new Date(),
-      upDatedAt: new Date(),
-    };
+    const book = new Book('1', 'Test Book', true, new Date(), new Date());
     mockBookRepository.findById.mockResolvedValue(book);
     const result = await bookService.findById('1');
     expect(result).toEqual(book);

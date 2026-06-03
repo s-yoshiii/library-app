@@ -13,9 +13,9 @@ export class PrismaBookRepository implements BookRepositoryInterface {
     this.prisma = new PrismaClient({ adapter });
   }
 
-  async create(title: string): Promise<Book> {
+  async create(book: Book): Promise<Book> {
     const row = await this.prisma.book.create({
-      data: { title, isAvailable: true },
+      data: { id: book.id, title: book.title, isAvailable: book.isAvailable },
     });
     return new Book(row.id, row.title, row.isAvailable, row.createdAt, row.upDatedAt);
   }

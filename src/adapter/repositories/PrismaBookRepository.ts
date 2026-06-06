@@ -1,16 +1,12 @@
-import { PrismaLibSql } from '@prisma/adapter-libsql';
-import { PrismaClient } from '@/generated/prisma/client.js';
+import type { PrismaClient } from '@/generated/prisma/client.js';
 import { Book } from '../../domain/entities/book.js';
 import type { BookRepositoryInterface } from '../../domain/repositories/BookRepositoryInterface.js';
 
 export class PrismaBookRepository implements BookRepositoryInterface {
   private readonly prisma: PrismaClient;
 
-  constructor() {
-    const adapter = new PrismaLibSql({
-      url: process.env['DATABASE_URL'] ?? 'file:./prisma/dev.db',
-    });
-    this.prisma = new PrismaClient({ adapter });
+  constructor(prisma: PrismaClient) {
+    this.prisma = prisma;
   }
 
   async create(book: Book): Promise<Book> {

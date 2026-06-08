@@ -1,0 +1,19 @@
+import type { BookRepositoryInterface } from '@/domain/repositories/BookRepositoryInterface.js';
+import type { FindBookByIdUseCaseInterface } from './findBookByIdUseCaseInterface.js';
+import type { FindBookByIdRequestDto } from '@/application/dtos/book/findBookByIdRequestDto.js';
+import type { FindBookByIdResponseDto } from '@/application/dtos/book/findBookByIdResponseDto.js';
+
+export class FindBookByIdUseCase implements FindBookByIdUseCaseInterface {
+  constructor(private readonly bookRepository: BookRepositoryInterface) {}
+  async execute(requestDto: FindBookByIdRequestDto): Promise<FindBookByIdResponseDto | null> {
+    const foundBook = await this.bookRepository.findById(requestDto.id);
+    if (!foundBook) return null;
+    return {
+      id: foundBook.id,
+      title: foundBook.title,
+      isAvailable: foundBook.isAvailable,
+      createdAt: foundBook.createdAt,
+      upDatedAt: foundBook.upDatedAt,
+    };
+  }
+}

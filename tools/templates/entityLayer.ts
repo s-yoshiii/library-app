@@ -19,7 +19,7 @@ export function generateRepositoryInterface(name: string) {
   const Cap = capitalize(name);
   const low = lowercaseFirst(name);
   const content = [
-    `import { ${Cap} } from '../entities/${low}';`,
+    `import { ${Cap} } from '../entities/${low}.js';`,
     `export interface ${Cap}RepositoryInterface {`,
     `    create(${low}: ${Cap}): Promise<${Cap}>;`,
     `    findById(id: string): Promise<${Cap} | null>;`,

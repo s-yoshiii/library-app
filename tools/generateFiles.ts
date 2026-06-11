@@ -3,6 +3,12 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { generateEntity, generateRepositoryInterface } from './templates/entityLayer';
 import { lowercaseFirst, writeFile } from './utils';
+import {
+  generateRequestDto,
+  generateResponseDto,
+  generateUseCase,
+  generateUseCaseInterface,
+} from './templates/useCaseLayer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +30,42 @@ async function generateEntityLayer() {
     repositoryInterfaceContent,
   );
 }
+async function generateUseCaseLayer() {
+  const { entityName, useCaseName } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'entityName',
+      message: 'エンティティ名を入力してください。',
+    },
+    {
+      type: 'input',
+      name: 'useCaseName',
+      message: 'ユースケース名を入力してください',
+    },
+  ]);
+  const basePath = path.join(__dirname, '..', 'src', 'application');
+  const entityDir = lowercaseFirst(entityName);
+  const UseCaseInterfaceContent = generateUseCaseInterface(entityName, useCaseName);
+  writeFile(
+    path.join(basePath, 'usecases', entityDir, `${lowercaseFirst(useCaseName)}UseCaseInterface.ts`),
+    UseCaseInterfaceContent,
+  );
+  const UseCaseContent = generateUseCase(entityName, useCaseName);
+  writeFile(
+    path.join(basePath, 'usecases', entityDir, `${lowercaseFirst(useCaseName)}UseCase.ts`),
+    UseCaseContent,
+  );
+  const RequestDtoContent = generateRequestDto(useCaseName);
+  writeFile(
+    path.join(basePath, 'dtos', entityDir, `${lowercaseFirst(useCaseName)}RequestDto.ts`),
+    RequestDtoContent,
+  );
+  const ResponseDtoContent = generateResponseDto(useCaseName);
+  writeFile(
+    path.join(basePath, 'dtos', entityDir, `${lowercaseFirst(useCaseName)}ResponseDto.ts`),
+    ResponseDtoContent,
+  );
+}
 
 async function main() {
   const layers = ['Entity', 'UseCase', 'Interface adapter', 'Framework & driver'] as const;
@@ -39,7 +81,7 @@ async function main() {
   if (layer === 'Entity') {
     await generateEntityLayer();
   } else if (layer === 'UseCase') {
-    console.log('UseCase');
+    await generateUseCaseLayer();
   } else if (layer === 'Interface adapter') {
     console.log('Interface adapter');
   } else if (layer === 'Framework & driver') {

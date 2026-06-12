@@ -45,25 +45,25 @@ async function generateUseCaseLayer() {
   ]);
   const basePath = path.join(__dirname, '..', 'src', 'application');
   const entityDir = lowercaseFirst(entityName);
-  const UseCaseInterfaceContent = generateUseCaseInterface(entityName, useCaseName);
+  const useCaseInterfaceContent = generateUseCaseInterface(entityName, useCaseName);
   writeFile(
     path.join(basePath, 'usecases', entityDir, `${lowercaseFirst(useCaseName)}UseCaseInterface.ts`),
-    UseCaseInterfaceContent,
+    useCaseInterfaceContent,
   );
-  const UseCaseContent = generateUseCase(entityName, useCaseName);
+  const useCaseContent = generateUseCase(entityName, useCaseName);
   writeFile(
     path.join(basePath, 'usecases', entityDir, `${lowercaseFirst(useCaseName)}UseCase.ts`),
-    UseCaseContent,
+    useCaseContent,
   );
   const RequestDtoContent = generateRequestDto(useCaseName);
   writeFile(
     path.join(basePath, 'dtos', entityDir, `${lowercaseFirst(useCaseName)}RequestDto.ts`),
     RequestDtoContent,
   );
-  const ResponseDtoContent = generateResponseDto(useCaseName);
+  const responseDtoContent = generateResponseDto(useCaseName);
   writeFile(
     path.join(basePath, 'dtos', entityDir, `${lowercaseFirst(useCaseName)}ResponseDto.ts`),
-    ResponseDtoContent,
+    responseDtoContent,
   );
 }
 

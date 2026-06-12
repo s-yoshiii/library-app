@@ -1,7 +1,7 @@
 import express from 'express';
 import { PrismaLibSql } from '@prisma/adapter-libsql';
 import { BookController } from '../../adapter/controllers/bookController.js';
-import { PrismaBookRepository } from '../../adapter/repositories/PrismaBookRepository.js';
+import { PrismaBookRepository } from '../../adapter/repositories/prismaBookRepository.js';
 import { AddBookUseCase } from '../../application/usecases/book/addBookUseCase.js';
 import { UuidGenerator } from '../../adapter/utils/uuidGenerator.js';
 import { PrismaClient } from '../../generated/prisma/client.js';

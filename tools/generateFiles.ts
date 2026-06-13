@@ -10,6 +10,7 @@ import {
   generateUseCaseInterface,
 } from './templates/useCaseLayer';
 import { generateController, generatePrismaRepository } from './templates/adapterLayer';
+import { generateRouter } from './templates/infrastructureLayer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -92,6 +93,21 @@ async function generateInterfaceAdapterLayer() {
     repositoryContent,
   );
 }
+async function generateInfrastructureLayer() {
+  const { entityName } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'entityName',
+      message: 'エンティティ名を入力してください。',
+    },
+  ]);
+  const basePath = path.join(__dirname, '..', 'src', 'infrastructure');
+  const routerContent = generateRouter(entityName);
+  writeFile(
+    path.join(basePath, 'web', 'routers', `${lowercaseFirst(entityName)}Router.ts`),
+    routerContent,
+  );
+}
 
 async function main() {
   const layers = ['Entity', 'UseCase', 'Interface adapter', 'Framework & driver'] as const;
@@ -111,7 +127,7 @@ async function main() {
   } else if (layer === 'Interface adapter') {
     await generateInterfaceAdapterLayer();
   } else if (layer === 'Framework & driver') {
-    console.log('Framework & driver');
+    await generateInfrastructureLayer();
   }
 }
 

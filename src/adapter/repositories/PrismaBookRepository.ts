@@ -18,7 +18,7 @@ export class PrismaBookRepository implements BookRepositoryInterface {
       createdBook.title,
       createdBook.isAvailable,
       createdBook.createdAt,
-      createdBook.upDatedAt,
+      createdBook.updatedAt,
     );
   }
 
@@ -34,7 +34,7 @@ export class PrismaBookRepository implements BookRepositoryInterface {
       foundBook.title,
       foundBook.isAvailable,
       foundBook.createdAt,
-      foundBook.upDatedAt,
+      foundBook.updatedAt,
     );
   }
 }

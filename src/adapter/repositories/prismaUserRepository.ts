@@ -5,11 +5,19 @@ import type { UserRepositoryInterface } from '@/domain/repositories/userReposito
 export class PrismaUserRepository implements UserRepositoryInterface {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async create(_user: User): Promise<User> {
-    throw new Error('Not implemented');
+  async create(user: User): Promise<User> {
+    const createUser = await this.prisma.user.create({
+      data: {
+        id: user.id,
+        email: user.email,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
+    });
+    return new User(createUser.id, createUser.email, createUser.createdAt, createUser.updatedAt);
   }
 
-  async findById(_id: string): Promise<User | null> {
-    throw new Error('Not implemented');
-  }
+  // async findById(_id: string): Promise<User | null> {
+  //   throw new Error('Not implemented');
+  // }
 }

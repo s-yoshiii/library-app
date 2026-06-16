@@ -16,7 +16,7 @@ export class UserController {
       res.status(201).json(user);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: '' });
+      res.status(500).json({ error: 'ユーザーの作成に失敗しました。' });
     }
   }
 }

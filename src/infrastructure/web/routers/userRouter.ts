@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import type { UserController } from '@/adapter/controllers/userController.js';
+import { UserController } from '@/adapter/controllers/userController.js';
 
-export function userRoutes(_userController: UserController): Router {
+export function userRoutes(userController: UserController): Router {
   const router = Router();
 
-  // Implement routes
+  router.post('/', userController.createUser.bind(userController));
 
   return router;
 }

@@ -18,6 +18,7 @@ model Book {
   isAvailable Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  loans Loan[]
 }
 
 model User {
@@ -25,4 +26,18 @@ model User {
   email String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  loans Loan[]
+}
+
+model Loan {
+  id String @id @default(ulid())
+  bookId String
+  userId String
+  loanDate DateTime
+  dueDate DateTime
+  returnDate DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  book Book @relation(fields: [bookId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }

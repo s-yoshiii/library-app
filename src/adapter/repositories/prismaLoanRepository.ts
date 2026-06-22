@@ -44,4 +44,21 @@ export class PrismaLoanRepository implements LoanRepositoryInterface {
       foundLoan.updatedAt,
     );
   }
+  async findByUserId(userId: string): Promise<Loan[]> {
+    const foundLoans = await this.prisma.loan.findMany({
+      where: { userId },
+    });
+    return foundLoans.map(
+      (foundLoan) =>
+        new Loan(
+          foundLoan.id,
+          foundLoan.bookId,
+          foundLoan.userId,
+          foundLoan.loanDate,
+          foundLoan.returnDate,
+          foundLoan.createdAt,
+          foundLoan.updatedAt,
+        ),
+    );
+  }
 }

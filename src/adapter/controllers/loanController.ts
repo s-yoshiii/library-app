@@ -10,13 +10,16 @@ export class LoanController {
 
   async loanBook(req: Request, res: Response): Promise<void> {
     try {
-      const requestDto: LoanBookRequestDto = {};
+      const requestDto: LoanBookRequestDto = {
+        bookId: req.body.bookId,
+        userId: req.body.userId,
+      };
       const loan = await this.loanBookUseCase.execute(requestDto);
 
-      res.status(200).json(loan);
+      res.status(201).json(loan);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: '' });
+      res.status(500).json({ error: '書籍の貸出に失敗しました。' });
     }
   }
 }

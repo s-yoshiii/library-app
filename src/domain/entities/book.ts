@@ -4,7 +4,7 @@ export class Book {
     private _title: string,
     private _isAvailable: boolean = true,
     private _createdAt: Date = new Date(),
-    private _upDatedAt: Date = new Date(),
+    private _updatedAt: Date = new Date(),
   ) {}
   get id(): string {
     return this._id;
@@ -18,8 +18,8 @@ export class Book {
   get createdAt(): Date {
     return this._createdAt;
   }
-  get upDatedAt(): Date {
-    return this._upDatedAt;
+  get updatedAt(): Date {
+    return this._updatedAt;
   }
   loan() {
     if (!this._isAvailable) {

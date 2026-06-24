@@ -19,7 +19,7 @@ export class AddBookUseCase implements AddBookUseCaseInterface {
       title: createdBook.title,
       isAvailable: createdBook.isAvailable,
       createdAt: createdBook.createdAt,
-      upDatedAt: createdBook.upDatedAt,
+      updatedAt: createdBook.updatedAt,
     };
   }
 }

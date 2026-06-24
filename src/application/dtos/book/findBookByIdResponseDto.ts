@@ -3,5 +3,5 @@ export interface FindBookByIdResponseDto {
   title: string;
   isAvailable: boolean;
   createdAt: Date;
-  upDatedAt: Date;
+  updatedAt: Date;
 }

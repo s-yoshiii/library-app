@@ -13,7 +13,7 @@ export class FindBookByIdUseCase implements FindBookByIdUseCaseInterface {
       title: foundBook.title,
       isAvailable: foundBook.isAvailable,
       createdAt: foundBook.createdAt,
-      upDatedAt: foundBook.upDatedAt,
+      updatedAt: foundBook.updatedAt,
     };
   }
 }

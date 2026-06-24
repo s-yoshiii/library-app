@@ -3,5 +3,5 @@ export interface AddBookResponseDto {
   title: string;
   isAvailable: boolean;
   createdAt: Date;
-  upDatedAt: Date;
+  updatedAt: Date;
 }

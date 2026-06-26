@@ -1,6 +1,7 @@
 import type { PrismaClient } from '@/generated/prisma/client.js';
 import { Book } from '../../domain/entities/book.js';
 import type { BookRepositoryInterface } from '../../domain/repositories/BookRepositoryInterface.js';
+import type { TransactionContextInterface } from '@/domain/utils/transactionContextInterface.js';
 
 export class PrismaBookRepository implements BookRepositoryInterface {
   private readonly prisma: PrismaClient;
@@ -9,8 +10,9 @@ export class PrismaBookRepository implements BookRepositoryInterface {
     this.prisma = prisma;
   }
 
-  async create(book: Book): Promise<Book> {
-    const createdBook = await this.prisma.book.create({
+  async create(book: Book, ctx?: TransactionContextInterface): Promise<Book> {
+    const prisma = ctx ? (ctx as PrismaClient) : this.prisma;
+    const createdBook = await prisma.book.create({
       data: { id: book.id, title: book.title, isAvailable: book.isAvailable },
     });
     return new Book(

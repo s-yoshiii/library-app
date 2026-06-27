@@ -24,8 +24,9 @@ export class PrismaBookRepository implements BookRepositoryInterface {
     );
   }
 
-  async findById(id: string): Promise<Book | null> {
-    const foundBook = await this.prisma.book.findUnique({
+  async findById(id: string, ctx?: TransactionContextInterface): Promise<Book | null> {
+    const prisma = ctx ? (ctx as PrismaClient) : this.prisma;
+    const foundBook = await prisma.book.findUnique({
       where: {
         id,
       },
@@ -39,8 +40,9 @@ export class PrismaBookRepository implements BookRepositoryInterface {
       foundBook.updatedAt,
     );
   }
-  async update(book: Book): Promise<Book> {
-    const updatedBook = await this.prisma.book.update({
+  async update(book: Book, ctx?: TransactionContextInterface): Promise<Book> {
+    const prisma = ctx ? (ctx as PrismaClient) : this.prisma;
+    const updatedBook = await prisma.book.update({
       where: {
         id: book.id,
       },

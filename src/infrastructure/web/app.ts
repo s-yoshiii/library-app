@@ -15,6 +15,7 @@ import { PrismaLoanRepository } from '@/adapter/repositories/prismaLoanRepositor
 import { LoanBookUseCase } from '@/application/usecases/loan/loanBookUseCase.js';
 import { LoanController } from '@/adapter/controllers/loanController.js';
 import { loanRoutes } from './routers/loanRouter.js';
+import { PrismaTransactionManager } from '@/application/utils/prismaTransactionManager.js';
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 const adapter = new PrismaLibSql({ url: process.env['DATABASE_URL'] ?? 'file:./prisma/dev.db' });
 const prisma = new PrismaClient({ adapter });
 const uuidGenerator = new UuidGenerator();
+const transactionManager = new PrismaTransactionManager(prisma);
 const bookRepository = new PrismaBookRepository(prisma);
 const addBookUseCase = new AddBookUseCase(bookRepository, uuidGenerator);
 const findBookByIdUseCase = new FindBookByIdUseCase(bookRepository);
@@ -32,7 +34,12 @@ const createUserUseCase = new CreateUserUseCase(userRepository, uuidGenerator);
 const userController = new UserController(createUserUseCase);
 
 const loanRepository = new PrismaLoanRepository(prisma);
-const loanBookUseCase = new LoanBookUseCase(loanRepository, bookRepository, uuidGenerator);
+const loanBookUseCase = new LoanBookUseCase(
+  loanRepository,
+  bookRepository,
+  uuidGenerator,
+  transactionManager,
+);
 const loanController = new LoanController(loanBookUseCase);
 
 app.use('/books', bookRoutes(bookController));

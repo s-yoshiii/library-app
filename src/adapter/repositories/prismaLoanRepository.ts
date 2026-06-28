@@ -65,4 +65,24 @@ export class PrismaLoanRepository implements LoanRepositoryInterface {
         ),
     );
   }
+  async update(loan: Loan, ctx?: TransactionContextInterface): Promise<Loan> {
+    const prisma = ctx ? (ctx as PrismaClient) : this.prisma;
+    const updatedLoan = await prisma.loan.update({
+      where: {
+        id: loan.id,
+      },
+      data: {
+        returnDate: loan.returnDate,
+      },
+    });
+    return new Loan(
+      updatedLoan.id,
+      updatedLoan.bookId,
+      updatedLoan.userId,
+      updatedLoan.loanDate,
+      updatedLoan.returnDate,
+      updatedLoan.createdAt,
+      updatedLoan.updatedAt,
+    );
+  }
 }

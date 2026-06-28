@@ -3,10 +3,7 @@ import type { CreateUserUseCaseInterface } from '@/application/usecases/user/cre
 import type { CreateUserRequestDto } from '@/application/dtos/user/createUserRequestDto.js';
 
 export class UserController {
-  constructor(
-    private readonly createUserUseCase: CreateUserUseCaseInterface,
-    // Add other useCase propaties as needed
-  ) {}
+  constructor(private readonly createUserUseCase: CreateUserUseCaseInterface) {}
 
   async createUser(req: Request, res: Response): Promise<void> {
     try {

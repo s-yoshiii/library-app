@@ -4,7 +4,6 @@ export class User {
     private _email: string,
     private _createdAt: Date = new Date(),
     private _updatedAt: Date = new Date(),
-    // Add other properties as needed
   ) {}
   get id(): string {
     return this._id;

@@ -10,7 +10,8 @@
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "test": "jest",
     "prepare": "husky",
-    "generate": "tsx tools/generateFiles.ts"
+    "generate": "tsx tools/generateFiles.ts",
+    "cli": "tsx src/infrastructure/cli/app.ts"
   },
   "keywords": [],
   "author": "",

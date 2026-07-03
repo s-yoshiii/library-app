@@ -1,5 +1,5 @@
 import type { PrismaClient } from '@/generated/prisma/client.js';
-import type { TransactionManagerInterface } from './transactionManagerInterface.js';
+import type { TransactionManagerInterface } from '@/application/utils/transactionManagerInterface.js';
 import type { TransactionContextInterface } from '@/domain/utils/transactionContextInterface.js';
 
 export class PrismaTransactionManager implements TransactionManagerInterface {

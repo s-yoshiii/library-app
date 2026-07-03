@@ -15,7 +15,7 @@ import { PrismaLoanRepository } from '@/adapter/repositories/prismaLoanRepositor
 import { LoanBookUseCase } from '@/application/usecases/loan/loanBookUseCase.js';
 import { LoanController } from '@/adapter/controllers/loanController.js';
 import { loanRoutes } from './routers/loanRouter.js';
-import { PrismaTransactionManager } from '@/application/utils/prismaTransactionManager.js';
+import { PrismaTransactionManager } from '@/adapter/utils/prismaTransactionManager.js';
 import { ReturnBookUseCase } from '@/application/usecases/loan/returnBookUseCase.js';
 
 const app = express();

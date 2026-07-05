@@ -29,7 +29,7 @@ export class Book {
   }
   return() {
     if (this._isAvailable) {
-      throw new Error('書籍はこの本はすでに返却されています。');
+      throw new Error('この本はすでに返却されています。');
     }
     this._isAvailable = true;
   }

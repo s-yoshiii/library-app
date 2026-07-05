@@ -2,7 +2,7 @@ import type { LoanRepositoryInterface } from '@/domain/repositories/loanReposito
 import type { LoanBookRequestDto } from '@/application/dtos/loan/loanBookRequestDto.js';
 import type { LoanBookResponseDto } from '@/application/dtos/loan/loanBookResponseDto.js';
 import type { LoanBookUseCaseInterface } from './loanBookUseCaseInterface.js';
-import type { BookRepositoryInterface } from '@/domain/repositories/BookRepositoryInterface.js';
+import type { BookRepositoryInterface } from '@/domain/repositories/bookRepositoryInterface.js';
 import type { IdGeneratorInterface } from '@/domain/utils/idGeneratorInterface.js';
 import { Loan } from '@/domain/entities/loan.js';
 import type { TransactionManagerInterface } from '@/application/utils/transactionManagerInterface.js';

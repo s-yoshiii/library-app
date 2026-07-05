@@ -1,9 +1,9 @@
-import type { BookRepositoryInterface } from '@/domain/repositories/BookRepositoryInterface.js';
+import type { BookRepositoryInterface } from '@/domain/repositories/bookRepositoryInterface.js';
 import type { AddBookUseCaseInterface } from './addBookUseCaseInterface.js';
 import type { IdGeneratorInterface } from '@/domain/utils/idGeneratorInterface.js';
 import { Book } from '@/domain/entities/book.js';
 import type { AddBookRequestDto } from '@/application/dtos/book/addBookRequestDto.js';
-import type { AddBookResponseDto } from '@/application/dtos/book/addBookResponse.js';
+import type { AddBookResponseDto } from '@/application/dtos/book/addBookResponseDto.js';
 
 export class AddBookUseCase implements AddBookUseCaseInterface {
   constructor(

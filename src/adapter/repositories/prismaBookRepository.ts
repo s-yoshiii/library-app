@@ -1,6 +1,6 @@
 import type { PrismaClient } from '@/generated/prisma/client.js';
 import { Book } from '../../domain/entities/book.js';
-import type { BookRepositoryInterface } from '../../domain/repositories/BookRepositoryInterface.js';
+import type { BookRepositoryInterface } from '../../domain/repositories/bookRepositoryInterface.js';
 import type { TransactionContextInterface } from '@/domain/utils/transactionContextInterface.js';
 
 export class PrismaBookRepository implements BookRepositoryInterface {

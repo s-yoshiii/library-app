@@ -2,7 +2,7 @@ import type { LoanRepositoryInterface } from '@/domain/repositories/loanReposito
 import type { ReturnBookRequestDto } from '@/application/dtos/loan/returnBookRequestDto.js';
 import type { ReturnBookResponseDto } from '@/application/dtos/loan/returnBookResponseDto.js';
 import type { ReturnBookUseCaseInterface } from './returnBookUseCaseInterface.js';
-import type { BookRepositoryInterface } from '@/domain/repositories/BookRepositoryInterface.js';
+import type { BookRepositoryInterface } from '@/domain/repositories/bookRepositoryInterface.js';
 import type { TransactionManagerInterface } from '@/application/utils/transactionManagerInterface.js';
 
 export class ReturnBookUseCase implements ReturnBookUseCaseInterface {
